@@ -67,7 +67,7 @@ def backup_mysql_database(db: str, backup_dir: Path):
 
     if result.returncode:
         print(result.stderr)
-        return []
+        return
 
     with open(filepath, "w") as f:
         f.writelines(result.stdout)
@@ -77,7 +77,6 @@ def backup_mysql(config: dict, backup_dir: Path):
     print(f"Backing up MySQL server '{config['name']}'")
     mysql_create_config(config)
     backup_dir = backup_dir / config["name"]
-    print(backup_dir)
 
     for db in mysql_databases(config):
         backup_mysql_database(db, backup_dir)
