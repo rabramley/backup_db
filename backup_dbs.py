@@ -1,20 +1,22 @@
 #!/usr/bin/python3
+import os
 import tomllib
 import subprocess
 from pathlib import Path
 from datetime import datetime
 
 
+THIS_DIR_PATH = Path(os.path.dirname(os.path.realpath(__file__)))
+MYSQL_CONFIG_FILENAME=THIS_DIR_PATH / "backup_dbs.cnf"
+CONFIG_FILENAME=THIS_DIR_PATH / "backup_dbs.toml"
+
+
 def get_config():
-    config_path = Path("backup_dbs.toml")
-    if not config_path.exists():
+    if not CONFIG_FILENAME.exists():
         return dict()
 
-    with open(config_path, "rb") as f:
+    with open(CONFIG_FILENAME, "rb") as f:
         return tomllib.load(f)
-
-
-MYSQL_CONFIG_FILENAME=Path("backup_dbs.cnf")
 
 
 def mysql_create_config(config):
