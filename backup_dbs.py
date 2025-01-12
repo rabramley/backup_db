@@ -25,6 +25,7 @@ def mysql_create_config(config):
         f.write(f"host=\"{config['host']}\"\n")
         f.write(f"user=\"{config['user']}\"\n")
         f.write(f"password=\"{config['password']}\"\n")
+    subprocess.call(['chmod', '0600', MYSQL_CONFIG_FILENAME])
 
 
 def mysql_databases(config):
